@@ -1,2 +1,2 @@
 # OJTest
-Test programs
+这个仓库主要存放一些技术原型
