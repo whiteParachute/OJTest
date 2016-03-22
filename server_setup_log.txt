@@ -4,26 +4,30 @@ Apache2:
 		sudo apt-get install apache2
 	config:
 		/etc/apache2/apache2.conf:
-			add:
+			add:	#使目录具有访问权限
 				<Directory /home/onlinejudge/www/>
-        		Options Indexes FollowSymLinks
-        		AllowOverride None
-        		Require all granted
+        			Options Indexes FollowSymLinks
+        			AllowOverride None
+        			Require all granted
 				</Directory>
 		/etc/apache2/ports.conf:
-			add:
+			add:	#更改侦听端口
 				Listen 8080
 				Listen 32768
-		cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/oj-settings.conf:
-			change:
+		vim /etc/apache2/sites-available/000-default.conf
+			change:	#更改站点目录
 				<VirtualHost *:8080>
-				DocumentRoot /home/onlinejudge/www/
-	enable/disable-VirtualHost:
-		sudo a2ensite mynewsite
-		sudo a2dissite mynewsite
+				DocumentRoot /home/onlinejudge/web/
+		cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/oj-settings.conf:		#配置虚拟主机，暂时用不到
+			change:
+				<VirtualHost *:32768>
+				DocumentRoot /home/yourdir/
+	enable/disable-VirtualHost:		#使虚拟主机生效
+		sudo a2ensite on-settings
+		sudo a2dissite on-settings
 		sudo service apache2 restart
 	comment:
-		1) 更改DocumentRoot后需要给相应的目录递归设置755权限 chmod -R 755 dir/
+		1) 更改DocumentRoot后需要给相应的目录递归设置755权限 chmod -R 755 yourdir/
 php:
 	version: PHP 5.5.9-1ubuntu4.14 (cli)
 	install:
