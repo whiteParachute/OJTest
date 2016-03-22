@@ -7,7 +7,7 @@ import socket, pickle
 # LANGUAGE = input("language = ")
 client = socket.socket()
 client.connect(('127.0.0.1', 32768))
-data = ["abang1996", "lbn668289", "1000", "0"]
+data = ["yourusername", "yourpasswd", "1000", "0"]
 #client.sendall(pickle.dumps([USERNAME, PASSWD, PROBLEM_ID, LANGUAGE]))
 client.sendall(pickle.dumps(data))
 
